@@ -35,3 +35,4 @@ def get_metadata(request):
 
     return HttpResponse(response, content_type=content_type)
 
+
