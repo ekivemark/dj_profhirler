@@ -4,9 +4,11 @@ import os
 
 from django.http import HttpResponse, JsonResponse
 from django.conf import settings
+from django.template.loader import render_to_string
 
 # from ..profhirler.fhir_interface import f_metadata
 # from ..profhirler.formatter import pretty_json
+from .arg_handler import get_arg
 
 THIS_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + "/fhiroperation/"
 URL = settings.FHIR_URL
@@ -35,14 +37,12 @@ def get_membermatch(request):
     :return result_parameter:
     """
     operation = "$member-match"
-    # resource = "metadata"
-    # result = f_metadata(URL + resource)
-    # response = pretty_json(result.json(), pretty=True)
-    with open(THIS_DIR + '/templates/parameter_response.json', 'r', encoding='utf-8-sig') as f:
-        r = f.read()
+    sample_return = get_arg(request, 'sample_return')
+    if sample_return:
+        # return a sample parameter response
+        with open(THIS_DIR + '/templates/parameter_response.json', 'r', encoding='utf-8-sig') as f:
+            r = f.read()
+        response = json.loads(r)
+        return HttpResponse(json.dumps(response, indent=settings.INDENT), content_type=content_type)
 
-    response = json.loads(r)
-
-    return HttpResponse(json.dumps(response, indent=settings.INDENT), content_type=content_type)
-
-
+    return
