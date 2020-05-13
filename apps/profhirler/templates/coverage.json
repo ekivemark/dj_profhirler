@@ -1,0 +1,73 @@
+{
+  "resourceType": "Coverage",
+  "id": "{{coverage._id}}",
+  "text": {
+    "status": "generated",
+    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">A human-readable rendering of the coverage for {{coverage.beneficiary}}</div>"
+  },
+  "identifier": [
+    {
+      "system": "http://oldhealthplan.example.com",
+      "value": "{{coverage.identifier}}"
+    }
+  ],
+  "status": "{{coverage.status}}",
+  "beneficiary": {
+    "reference": "{{coverage.beneficiary}}"
+  },
+  "period": {
+    "start": "{{coverage.coverage_start}}",
+    "end": "{{coverage.coverage_end}}"
+  },
+  "payor": [
+    {
+      "reference": "{{coverage.payor}}"
+    }
+  ],
+  "class": [
+    {
+      "type": {
+        "coding": [
+          {
+            "system": "http://terminology.hl7.org/CodeSystem/coverage-class",
+            "code": "group"
+          }
+        ]
+      },
+      "value": "{{coverage.group}}"
+    },
+    {
+      "type": {
+        "coding": [
+          {
+            "system": "http://terminology.hl7.org/CodeSystem/coverage-class",
+            "code": "plan"
+          }
+        ]
+      },
+      "value": "{{coverage.plan}}"
+    },
+    {
+      "type": {
+        "coding": [
+          {
+            "system": "http://terminology.hl7.org/CodeSystem/coverage-class",
+            "code": "subplan"
+          }
+        ]
+      },
+      "value": "{{coverage.subplan}}"
+    },
+    {
+      "type": {
+        "coding": [
+          {
+            "system": "http://terminology.hl7.org/CodeSystem/coverage-class",
+            "code": "class"
+          }
+        ]
+      },
+      "value": "{{coverage.class}}"
+    }
+  ]
+}

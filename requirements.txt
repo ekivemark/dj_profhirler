@@ -6,7 +6,9 @@ Django==3.0.6
 entrypoints==0.3
 flake8==3.7.9
 idna==2.9
+Jinja2==2.11.2
 jsonpath-ng==1.5.1
+MarkupSafe==1.1.1
 mccabe==0.6.1
 ply==3.11
 pycodestyle==2.5.0

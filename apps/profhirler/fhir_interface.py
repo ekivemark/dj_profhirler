@@ -5,7 +5,8 @@
 
 import requests
 from django.conf import settings
-from jsonpath_ng import parser
+# from jsonpath_ng import parser
+
 
 def f_metadata(url):
     """
@@ -44,19 +45,23 @@ def f_put(url, data={}):
     :param data:
     :return result:
     """
-    r = requests.put(url=url, data=data)
+    print("DATA is:", type(data))
+    r = requests.put(url=url,
+                     data=data,
+                     headers={
+                         'content-type': settings.FHIR_DEFAULT_CONTENT_TYPE})
 
     return r
 
 
-def f_get(url, data={}):
+def f_get(url, data={}, payload={}):
     """
     Get a record
     :param url:
     :param data:
     :return result:
     """
-    r = requests.get(url=url, data=data)
+    r = requests.get(url=url, data=data, params=payload)
 
     return r
 
@@ -86,7 +91,7 @@ def get_all_bundle(bundle):
     total = bundle['total']
 
     while len(entries) < total:
-        print(len(entries))
+        # print(len(entries))
         next = get_next_url(bundle['link'])
         if next:
             b = f_metadata(next)

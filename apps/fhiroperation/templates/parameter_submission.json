@@ -1,0 +1,234 @@
+{
+    "resourceType": "Parameters",
+    "parameter": [
+      {
+        "name": "exact",
+        "valueBoolean": true
+      },
+      {
+        "name": "MemberPatient",
+        "resource": {
+          "resourceType": "Patient",
+          "id": "{{patient.patient_id}}",
+          "identifier": [
+            {
+                "type": {
+                    "coding": [
+                        {
+                            "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                            "code": "MB"
+                        }
+                    ]
+                },
+                "system": "http://oldhealthplan.example.com",
+                "value": "{{patient.patient_identifier}}",
+                "assigner":  {
+                    "reference": "Organization/2",
+                    "_reference": {
+                        "fhir_comments": [
+                          "This is the member ID for the old health plan provided by the member."
+                        ]
+                    }
+                }
+            }
+          ],
+          "name": [
+            {
+              "use": "official",
+              "family": "{{patient.lastname}}",
+              "given": [
+                "{{patient.firstname}}",
+                "{{patient.middlename}}"
+              ]
+            }
+          ],
+          "gender": "{{patient.gender}}",
+          "birthDate": "{{patient.dob}}"
+        }
+      },
+      {
+        "name": "OldCoverage",
+        "resource": {
+          "resourceType": "Coverage",
+          "id": "{{coverage.coverage_id}}",
+          "text": {
+            "status": "generated",
+            "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">A human-readable rendering of the coverage</div>"
+          },
+          "contained": [
+            {
+              "resourceType" : "Organization",
+              "id" : "{{coverage.payor}}",
+              "name" : "Old Health Plan",
+              "endpoint" : [
+                {
+                  "reference" : "http://www.oldhealthplan.com"
+                }
+             ]
+            }
+            ],
+          "identifier": [
+            {
+              "system": "http://oldhealthplan.example.com",
+              "value": "{{coverage.coverage_identifier}}"
+            }
+          ],
+          "status": "draft",
+          "beneficiary": {
+            "reference": "Patient/{{patient.patient_id}}"
+          },
+          "period": {
+            "start": "{{coverage.coverage_start}}",
+            "end": "{{coverage.coverage_end}}"
+          },
+          "payor": [
+            {
+              "reference": "#{{coverage.payor}}"
+            }
+          ],
+          "class": [
+            {
+              "type": {
+                "coding": [
+                  {
+                    "system": "http://terminology.hl7.org/CodeSystem/coverage-class",
+                    "code": "group"
+                  }
+                ]
+              },
+              "value": "{{coverage.group}}"
+            },
+            {
+              "type": {
+                "coding": [
+                  {
+                    "system": "http://terminology.hl7.org/CodeSystem/coverage-class",
+                    "code": "plan"
+                  }
+                ]
+              },
+              "value": "{{coverage.plan}}"
+            },
+            {
+              "type": {
+                "coding": [
+                  {
+                    "system": "http://terminology.hl7.org/CodeSystem/coverage-class",
+                    "code": "subplan"
+                  }
+                ]
+              },
+              "value": "{{coverage.subplan}}"
+            },
+            {
+              "type": {
+                "coding": [
+                  {
+                    "system": "http://terminology.hl7.org/CodeSystem/coverage-class",
+                    "code": "class"
+                  }
+                ]
+              },
+              "value": "{{coverage.class}}"
+            }
+          ]
+        }
+      },
+      {
+        "name": "NewCoverage",
+        "resource": {
+          "resourceType": "Coverage",
+          "id": "coverage_new.coverage_id",
+          "contained": [
+              {
+                "resourceType" : "Organization",
+                "id" : "{{coverage_new.payor}}",
+                "name" : "New Health Plan",
+                "endpoint" : [
+                  {
+                    "reference" : "http://www.newhealthplan.com"
+                  }
+                ]
+              }
+            ],
+            "identifier": [
+            {
+              "system": "http://newealthplan.example.com",
+              "value": "{{coverage_new.coverage_identifier}}"
+            }
+          ],
+          "status": "active",
+          "beneficiary": {
+            "reference": "Patient/{{patient.patient_id}}"
+          },
+          "period": {
+            "start": "{{coverage_new.coverage_start}}",
+            "end": "{{coverage_new.coverage_end}}"
+          },
+          "payor": [
+            {
+              "reference": "#{{coverage_new.payor}}"
+            }
+          ],
+          "class": [
+            {
+              "type": {
+                "coding": [
+                  {
+                    "system": "http://terminology.hl7.org/CodeSystem/coverage-class",
+                    "code": "group"
+                  }
+                ]
+              },
+              "value": "{{coverage_new.group}}",
+              "name": "New Health Plan Group"
+            },
+            {
+              "type": {
+                "coding": [
+                  {
+                    "system": "http://terminology.hl7.org/CodeSystem/coverage-class",
+                    "code": "subgroup"
+                  }
+                ]
+              },
+              "value": "{{coverage_new.subgroup}}"
+            },
+            {
+              "type": {
+                "coding": [
+                  {
+                    "system": "http://terminology.hl7.org/CodeSystem/coverage-class",
+                    "code": "plan"
+                  }
+                ]
+              },
+              "value": "{{coverage_new.plan}}"
+            },
+            {
+              "type": {
+                "coding": [
+                  {
+                    "system": "http://terminology.hl7.org/CodeSystem/coverage-class",
+                    "code": "subplan"
+                  }
+                ]
+              },
+              "value": "{{coverage_new.subplan}}"
+            },
+            {
+              "type": {
+                "coding": [
+                  {
+                    "system": "http://terminology.hl7.org/CodeSystem/coverage-class",
+                    "code": "class"
+                  }
+                ]
+              },
+              "value": "{{coverage_new.class}}"
+            }
+          ]
+        }
+      }
+    ]
+  }

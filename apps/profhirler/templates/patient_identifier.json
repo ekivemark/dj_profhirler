@@ -5,11 +5,11 @@
                 {
                   "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
                   "code": "{{patient_id.code}}",
-                  "display": "Unique member number",
+                  "display": "Member Number",
                   "userSelected": false
                 }
             ],
-            "text": "Unique member number"
+            "text": "Member Number"
           },
   "system": "{{patient_id.system}}",
   "value": "{{patient_id.number}}"

@@ -1,0 +1,15 @@
+{
+  "_id": "OCOV-1004",
+  "identifier": "DH10001236",
+  "subscriberid": "dh-10104",
+  "payor": "Organization/diamond-health",
+  "group": "CB135",
+  "subgroup": "",
+  "plan": "B37FC",
+  "subplan": "P7",
+  "class": "SILVER",
+  "coverage_start": "2018-05-23",
+  "coverage_end": "2019-05-22",
+  "status": "active",
+  "beneficiary": "Patient/DH10001236"
+}
