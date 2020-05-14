@@ -2,6 +2,7 @@
 import json
 import os
 
+from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse, JsonResponse
 from django.conf import settings
 # from django.template.loader import render_to_string
@@ -34,6 +35,7 @@ def index(request):
     return HttpResponse(response)
 
 
+@csrf_exempt
 def get_membermatch(request):
     """
     $member-match
@@ -58,7 +60,7 @@ def get_membermatch(request):
                                        indent=settings.INDENT),
                             content_type=content_type)
     # We didn't do a sample return so now we will process a member-match
-    if request.method == "GET":
+    if request.method == "GET" or request.method == 'POST':
         if request.content_type in ['application/json',
                                     'application/json+fhir']:
             member = {}
@@ -133,7 +135,7 @@ def get_membermatch(request):
                     if "UMB" in identifier_cv:
                         for id in beneficiary_identifier[0]:
                             if id['type']['coding'][0]['code'].upper() == "UMB":
-                                # member['identifier'].append(id)
+                                member['identifier'].append(id)
                                 unique_id['identifier'].append(id)
 
                     # Return the updated patient record
@@ -144,8 +146,8 @@ def get_membermatch(request):
                     if requester:
                         parameters_out['parameter'].append({"name": "NewCoverage",
                                                             "resource": requester})
-                    if len(unique_id['identifier']) > 0:
-                        parameters_out['parameter'].append(unique_id)
+                    # if len(unique_id['identifier']) > 0:
+                    #     parameters_out['parameter'].append(unique_id)
 
                     return HttpResponse(json.dumps(parameters_out))
 

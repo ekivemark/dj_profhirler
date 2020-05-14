@@ -125,3 +125,32 @@ def extract_object(obj, key):
 
     results = extract(obj, arr, key)
     return results
+
+
+def extract_key_value(obj, key):
+    """
+    Pull all keys and respective values from nested JSON.
+    Based on a great code snippet from Todd Birchard via
+    https://hackersandslackers.com/extract-data-from-complex-json-python/
+
+    """
+    arr = []
+
+    def extract(obj, arr, key):
+        """Recursively search for values of key in JSON tree."""
+        if isinstance(obj, dict):
+            for k, v in obj.items():
+                if k == key:
+                    arr.append({k: v})
+                elif isinstance(v, (dict, list)):
+                    extract(v, arr, key)
+        elif isinstance(obj, list):
+            for item in obj:
+                if item == key:
+                    arr.append({key: item})
+                else:
+                    extract(item, arr, key)
+        return arr
+
+    results = extract(obj, arr, key)
+    return results
