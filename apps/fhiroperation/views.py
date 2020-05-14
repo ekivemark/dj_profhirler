@@ -69,7 +69,7 @@ def get_membermatch(request):
                               "parameter": []
                               }
             unique_id = {"name": "uniqueMemberId",
-                         "identifier": {}
+                         "identifier": []
                          }
 
             mm_input = json.loads(request.read())
