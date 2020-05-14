@@ -133,7 +133,7 @@ def get_membermatch(request):
                     if "UMB" in identifier_cv:
                         for id in beneficiary_identifier[0]:
                             if id['type']['coding'][0]['code'].upper() == "UMB":
-                                member['identifier'].append(id)
+                                # member['identifier'].append(id)
                                 unique_id['identifier'].append(id)
 
                     # Return the updated patient record
