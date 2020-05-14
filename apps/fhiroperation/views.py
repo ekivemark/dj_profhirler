@@ -65,7 +65,12 @@ def get_membermatch(request):
             coverage = {}
             requester = {}
             beneficiary = {}
-            parameters_out = {}
+            parameters_out = {"resourceType": "Parameters",
+                              "parameter": []
+                              }
+            unique_id = {"name": "uniqueMemberId",
+                         "identifier": {}
+                         }
 
             mm_input = json.loads(request.read())
             if 'parameter' in mm_input:
@@ -129,17 +134,19 @@ def get_membermatch(request):
                         for id in beneficiary_identifier[0]:
                             if id['type']['coding'][0]['code'].upper() == "UMB":
                                 member['identifier'].append(id)
+                                unique_id['identifier'].append(id)
+
                     # Return the updated patient record
                     # after it is wrapped back into a parameters resource
-                    parameters_out = {"resourceType": "Parameters",
-                                      "parameter": []
-                                      }
                     if member:
                         parameters_out['parameter'].append({"name": "MemberPatient",
                                                             "resource": member})
                     if requester:
                         parameters_out['parameter'].append({"name": "NewCoverage",
                                                             "resource": requester})
+                    if len(unique_id['identifier']) > 0:
+                        parameters_out['parameter'].append(unique_id)
+
                     return HttpResponse(json.dumps(parameters_out))
 
             return HttpResponse(json.dumps(parameters_out))

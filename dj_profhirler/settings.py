@@ -28,8 +28,9 @@ SECRET_KEY = 'c)+d0%^1b9#_a_+p^-l24e$jd*r*701$_&mshucu&5&*h8o^rn'
 DEBUG = True
 
 EXTERNAL_IP = os.getenv('EXTERNAL_IP', "0.0.0.0")
+EXTERNAL_DNS = os.getenv('EXTERNAL_DNS', "0.0.0.0")
 
-ALLOWED_HOSTS = [EXTERNAL_IP]
+ALLOWED_HOSTS = [EXTERNAL_IP, EXTERNAL_DNS]
 
 # Basic Settings
 # Capture our current directory
