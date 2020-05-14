@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 THIS_DIR = BASE_DIR
@@ -26,7 +27,9 @@ SECRET_KEY = 'c)+d0%^1b9#_a_+p^-l24e$jd*r*701$_&mshucu&5&*h8o^rn'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+EXTERNAL_IP = os.getenv('EXTERNAL_IP', "0.0.0.0")
+
+ALLOWED_HOSTS = [EXTERNAL_IP]
 
 # Basic Settings
 # Capture our current directory
@@ -38,6 +41,8 @@ SECURED = False
 INDENT = 4
 FHIR_DEFAULT_CONTENT_TYPE = "application/json+fhir"
 
+# Status Code to return for failed Patient/$member-match
+MEMBER_MATCH_NOT_FOUND = 422
 
 # Application definition
 

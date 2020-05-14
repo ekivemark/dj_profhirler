@@ -7,7 +7,9 @@ from ast import literal_eval
 
 from django.http import HttpResponse
 from django.conf import settings
-from django.template import Template, Context
+# from django.template import (Template,
+#                              # Context,
+#                              )
 
 from jinja2 import Template, Environment, FileSystemLoader
 
