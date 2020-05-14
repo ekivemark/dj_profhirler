@@ -38,6 +38,7 @@ def index(request):
     <li>Metadata</li>
     <li>Coverage?create=True|False</li>
     <li>[Resource Name - Case Sensitive]</li>
+    <li>Patient/$member-match</li>
     """
 
     return HttpResponse(response)
