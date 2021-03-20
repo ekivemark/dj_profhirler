@@ -7,7 +7,7 @@ entrypoints==0.3
 flake8==3.7.9
 getenv==0.2.0
 idna==2.9
-Jinja2==2.11.2
+Jinja2==2.11.3
 jsonpath-ng==1.5.1
 MarkupSafe==1.1.1
 mccabe==0.6.1
